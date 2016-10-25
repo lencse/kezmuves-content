@@ -1,6 +1,6 @@
 <!--
 slug: first-of-many
-pubdate: 2016-10-25 18:00:00
+pubdate: 2016-10-25 19:00:00 +2
 category: Blog
 tags: [Blog, Szolgálati közlemény]
 -->
