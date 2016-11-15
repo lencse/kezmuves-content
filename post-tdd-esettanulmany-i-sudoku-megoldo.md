@@ -101,7 +101,7 @@ import { Sudoku } from "../src/Sudoku";
 npm run build-test
 ````
 
-Természetesen bukik a teszt. Olduk meg!
+Természetesen bukik a teszt. Oldjuk meg!
 
 ````typescript
 // src/Sudoku.ts
@@ -802,7 +802,7 @@ export class SubgridValidatorIterator extends ValidatorIterator{
         if (p.getColumn() % this.n == 0) {
             return new InProgressValidationState(pos(p.getRow()+1, p.getColumn()-this.n+1), newValues);
         }
-        return new InProgressValidationState(pos(p.getRow()+1, p.getColumn()), newValues);
+        return new InProgressValidationState(pos(p.getRow(), p.getColumn()+1), newValues);
     }
 
 }
@@ -820,12 +820,9 @@ export class Sudoku {
     private validate(iterator: ValidatorIterator): boolean {
         let state = startValidationState();
         while (!state.isFinished()) {
-            if (state.getSeenValues().indexOf(this.val(state.getPosition())) != -1) {
-                return false;
-            }
-            state = iterator.iterate(state, this.val(state.getPosition()));
+            // ...
         }
-        return true;
+        // ...
     }
 
 }
@@ -973,6 +970,17 @@ class InProgressValidationState implements ValidationState {
 ````
 
 ````typescript
+
+class FinishedValidationState implements ValidationState {
+
+    public isValid(): boolean {
+        return true;
+    }
+
+}
+````
+
+````typescript
 class InvalidValidationState implements ValidationState {
 
     public isFinished(): boolean {
@@ -1030,7 +1038,7 @@ Jó kérdés, tényleg nem tudom. Nyilván feltűnt, hogy amikor a refaktorálá
 
 Mindenestre a dolog filozófiájával kapcsolatban szívesen fogadok észrevételeket kommentben.
 
-### Fújjunk egyet!
+## Fújjunk egyet!
 
 Azt hiszem, lehetne ezt tovább csinosítani, de úgy ítélem meg, hogy most pihenhetünk egyet. A validáció működik, a nagyon csúnya kódismétléseket kiszűrtük. Az állapot osztályokban kivételt dobunk, azt hiszem, ezt szebben kéne megoldani, de most nem látok triviális megoldást, hogyan.
 
