@@ -134,8 +134,7 @@ Jó sok mindent beszántottunk most a projektbe, érdemes tisztázni, hogy mi is
 * [Typings](https://github.com/typings/typings#readme): a Typescript barátja. Természetesen szeretnénk használni a hatalmas mennyiségű, js-ben írt libraryt, de mivel a js-ben ninc szigorú típusosság, nem tudjuk, hogy milyen típusú válaszokta kapunk tőlük, az IDE nem tud kkódkiegészítést adni, stb. Ezen a problémán segít a Typings néhány megfelelő definíciós file elhelyezésével. Jelen projektben ilyen library a chai.
 * [Mocha](https://mochajs.org/): Tesztfuttató keretrendszer javascripthez.
 * [Chai](http://chaijs.com/): A Mocha hűséges párja, asserteket használhatunk vele
-* [mocha-typescript](https://github.com/PanayotCankov/mocha-typescript#readme): Typescript alatt ezzel fottatjuk a scripteket, a példában már látható dekorátotokkal.
-a tesztjeinkben.
+* [mocha-typescript](https://github.com/PanayotCankov/mocha-typescript#readme): Typescript alatt ezzel fottatjuk a scripteket, a példában már látható dekorátotokkal a tesztjeinkben.
 * [Travis](https://travis-ci.org): Continous Integration eszköz. Ha projektünket a githubra töltjük fel, a Travis a megfelelő konfigurációs file segítségével automatikusan buildel és lefuttatja a tesztjeinket különböző környezeteken.
 
 ## A Sudoku megépítése
