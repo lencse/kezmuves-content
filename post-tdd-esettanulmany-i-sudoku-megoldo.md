@@ -1,9 +1,11 @@
 <!--
 slug: tdd-esettanulmany-i-sudoku-megoldo
-pubdate: 2016-11-16 19:00:00 +2
+pubdate: 2016-11-21 12:00:00 +2
 category: Kódolás
 tags: [TDD, Typescript, Sudoku, Refactoring]
 -->
+![Rejtvényt fejtő úr](content/img/tdd-esettanulmany-i-sudoku-megoldo/sudoku.jpg) {.featured}
+
 # TDD esettanulmány I. – Sudoku megoldó
 
 Ismerkedem egy ideje a tesztvezérelt fejlesztéssel, de úgy érzem, van még mit tanulnom. Ebben a cikkben (és a következőkben) TDD módszereket követve próbálok kifejleszteni egy komponenst, ami backtracking algoritmussal old meg Sudoku rejtvényeket.
@@ -120,7 +122,7 @@ export class Sudoku {
 
   1 passing (0ms)
 ````
-
+https://www.facebook.com/katinkahosszu/posts/1315742941833011
  Örülünk.
 
 ### Mi történt?
@@ -393,7 +395,7 @@ A Clean Code könyvem ennél a pontnál rituális öngyilkosságot követett el,
 
 ### Stratégia
 
-Muszáj lesz megszüntetni a két ugyanolyan szerkezetű ciklust, már csak esztétikai okokból is, már csak azért is, mert ha ugyanezel az elvvel írnánk meg a résztáblázatok ellenőrzését, végképp káoszba fulladna az algoritmust.
+Muszáj lesz megszüntetni a két ugyanolyan szerkezetű ciklust, már csak esztétikai okokból is, de főleg, mert ha ugyanezel az elvvel írnánk meg a résztáblázatok ellenőrzését, végképp káoszba fulladna az algoritmus.
 
 Mit is csinálunk tulajdonképpen?
 
@@ -404,7 +406,7 @@ Mit is csinálunk tulajdonképpen?
 * Ha ütközést találunk, leállunk.
 * Ha ütközés nélkül elértük a jobb alsó sarkot, leállunk, szabályos a sudoku.
 
-Láthatjuk, hogy a lépések zöme megegyezik, függetlenül attól, hogy sorokat, oszlopokat, vagy résztáblázatokat vizsgálunk. Az algoritmusok között a különbséget a "valamilyen" és "néha" szavak jelölik. Induljunk el ebbe az irányba.
+Láthatjuk, hogy a bozonytalanságot jelölő *valamilyen* és *néha* szavakat leszámítva a lépések zöme megegyezik, függetlenül attól, hogy sorokat, oszlopokat, vagy résztáblázatokat vizsgálunk. Induljunk el ebbe az irányba.
 
 A lépéseknél a validáció állapotának tárolásához létesítünk egy osztályt, ami tudja, hol járunk, és milyen számok vannak a kosárban.
 ````typescript
@@ -868,7 +870,8 @@ export class RowValidatorIterator extends ValidatorIterator{
     }
 
 }
-
+````
+````typescript
 export class ColumnValidatorIterator extends ValidatorIterator{
 
     public iterate(state: ValidationState, val: number): ValidationState {
@@ -880,7 +883,8 @@ export class ColumnValidatorIterator extends ValidatorIterator{
     }
 
 }
-
+````
+````typescript
 export class SubgridValidatorIterator extends ValidatorIterator{
 
     public iterate(state: ValidationState, val: number): ValidationState {
@@ -921,7 +925,8 @@ export class RowValidatorIterator extends ValidatorIterator{
     }
 
 }
-
+````
+````typescript
 export class ColumnValidatorIterator extends ValidatorIterator{
 
     protected stepForward(state: ValidationState, val: number): ValidationState {
@@ -933,7 +938,8 @@ export class ColumnValidatorIterator extends ValidatorIterator{
     }
 
 }
-
+````
+````typescript
 export class SubgridValidatorIterator extends ValidatorIterator{
 
     protected stepForward(state: ValidationState, val: number): ValidationState {
@@ -1032,7 +1038,9 @@ export class Sudoku {
 }
 ````
 
-### Álljunk megy egy pillanatra! TDD ez még?
+### Álljunk megy egy pillanatra!
+
+#### TDD ez még?
 
 Jó kérdés, tényleg nem tudom. Nyilván feltűnt, hogy amikor a refaktorálási lépéseket végeztem, feltűnt, hogy nem írtam új teszteket, csak a meglévőket futtattam újra és újra, hogy ellenőrizzem, jó vagyok-e még. Az biztos, hogy lehetett volna inkább TDD szellemben csinálni ezt, az iterátorokhoz pl. tök jó teszteket lehetett volna írni előre. Úgy ítéltem meg, hogy ez a nagyságren még szűkösen épp belefér abba, hogy kis lépésekben haladjunk előre, ha megakadtam volna, akkor nekiálltam volna új teszteket írni.
 
@@ -1043,3 +1051,8 @@ Mindenestre a dolog filozófiájával kapcsolatban szívesen fogadok észrevéte
 Azt hiszem, lehetne ezt tovább csinosítani, de úgy ítélem meg, hogy most pihenhetünk egyet. A validáció működik, a nagyon csúnya kódismétléseket kiszűrtük. Az állapot osztályokban kivételt dobunk, azt hiszem, ezt szebben kéne megoldani, de most nem látok triviális megoldást, hogyan.
 
 Az alapozást elvégeztük, a következő cikkben jön a Sudoku feladvány megoldását megvalósító algoritmus.
+
+### Forráskód
+
+* A cikkben írt lépéseket [végig tudjátok követni a GitHubon.](https://github.com/lencse/afsudoku/commits/v0.1.0)
+* Az elkészült forráskódot [itt lehet letölteni.](https://github.com/lencse/afsudoku/releases/tag/v0.1.0)
