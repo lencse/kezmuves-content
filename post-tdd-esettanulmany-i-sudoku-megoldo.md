@@ -122,7 +122,6 @@ export class Sudoku {
 
   1 passing (0ms)
 ````
-https://www.facebook.com/katinkahosszu/posts/1315742941833011
  Örülünk.
 
 ### Mi történt?
