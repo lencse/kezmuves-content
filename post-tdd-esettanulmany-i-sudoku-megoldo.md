@@ -1040,9 +1040,9 @@ export class Sudoku {
 
 #### TDD ez még?
 
-Jó kérdés, tényleg nem tudom. Nyilván feltűnt, hogy amikor a refaktorálási lépéseket végeztem, feltűnt, hogy nem írtam új teszteket, csak a meglévőket futtattam újra és újra, hogy ellenőrizzem, jó vagyok-e még. Az biztos, hogy lehetett volna inkább TDD szellemben csinálni ezt, az iterátorokhoz pl. tök jó teszteket lehetett volna írni előre. Úgy ítéltem meg, hogy ez a nagyságren még szűkösen épp belefér abba, hogy kis lépésekben haladjunk előre, ha megakadtam volna, akkor nekiálltam volna új teszteket írni.
+Jó kérdés, tényleg nem tudom. Nyilván feltűnt, hogy amikor a refaktorálási lépéseket végeztem, feltűnt, hogy nem írtam új teszteket, csak a meglévőket futtattam újra és újra, hogy ellenőrizzem, jó vagyok-e még. Az biztos, hogy lehetett volna inkább TDD szellemben csinálni ezt, az iterátorokhoz pl. tök jó teszteket lehetett volna írni előre. Úgy ítéltem meg, hogy ez a nagyságrend még szűkösen épp belefér abba, hogy kis lépésekben haladjunk előre, ha megakadtam volna, akkor nekiálltam volna új teszteket írni.
 
-Mindenestre a dolog filozófiájával kapcsolatban szívesen fogadok észrevételeket kommentben.
+Mindenesetre a dolog filozófiájával kapcsolatban szívesen fogadok észrevételeket kommentben.
 
 ## Fújjunk egyet!
 
