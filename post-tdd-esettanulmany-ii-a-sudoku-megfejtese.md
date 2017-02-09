@@ -92,7 +92,7 @@ Nincs mese, valahogy meg kell különböztetnünk, hogy a sudoku táblát most �
 
 }
 ````
-A `Sudoku` osztályban bevezetjük a gyártófüggványt, és priváttá tesszük a konstruktort.
+A `Sudoku` osztályban bevezetjük a gyártófüggvényt, és priváttá tesszük a konstruktort.
 ````typescript
 export class Sudoku {
 
@@ -201,15 +201,81 @@ export class SudokuUnderSolving extends Sudoku {
 
 }
 ````
+Ebben a rövid sorban (`next.cells[0] = 1;`) túl sok hardcode van, nézzük meg, mik is ezek!
+* **Miért 0?** – Azért, mert ez az első szabadon variálható cella indexe.
+* **Miért 1?** – Azért, mert a cellában eddig 0 állt, ezt növeljük eggyel.
+
+Tárolnunk kell tehát:
+*  A szabad cellákat
+*  És hogy ezek közül épp melyiken állunk
+
 ````typescript
+export class SudokuUnderSolving extends Sudoku {
+
+    private modifyableCells: Array<number>;
+    private current: number;
+
+}
 ````
+Jó lenne ezeknek a `SudokuUnderSolving` létrehozásánál értéket adni. Ehhez egy absztrakt `setUp` metódust hívunk a szülőosztály konstruktorában.
 ````typescript
+export abstract class Sudoku {
+
+    protected constructor (n: number, cells: Array<number> = null) {
+        // ...
+        this.setUp();
+    }
+
+    protected abstract setUp();
+
+}
 ````
+Az egyik alosztályban ez lehet üres.
 ````typescript
+export class SudokuUnderSetup extends Sudoku {
+
+   protected setUp() {
+    }
+
+}
 ````
+A `SudokuUnderSolving` esetében pedig beállítjuk a kezdőértékeket, és kicseréljük a beégetett számokat.
 ````typescript
+export class SudokuUnderSolving extends Sudoku {
+
+    protected setUp() {
+        this.modifyableCells = [];
+        this.current = 0;
+        this.cells.map((cell: number, idx: number) => {
+            if (cell == 0) {
+                this.modifyableCells.push(idx);
+            }
+        });
+    }
+
+    public step(): SudokuUnderSolving {
+        let next = new SudokuUnderSolving(this.n, this.cells);
+        next.modifyableCells = this.modifyableCells;
+        next.current = this.current;
+        next.cells[next.modifyableCells[next.current]] = 1;
+        return next;
+    }
+
+}
 ````
+Vegyük észre, hogy a `current` a `modifyableCells`-en belüli indexre mutat, és az mutat a cella valódi indexére.
+
+A fenti kódban az 1 még mindig hardcode.
 ````typescript
+export class SudokuUnderSolving extends Sudoku {
+
+    public step(): SudokuUnderSolving {
+        // ...
+        next.cells[next.modifyableCells[next.current]] = 1;
+        return next;
+    }
+
+}
 ````
 ````typescript
 ````
